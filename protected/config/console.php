@@ -1,5 +1,5 @@
 <?php
-//d,slmflsmflsmlmfslfmlsmkf;klmslk;fmsfmslmfl
+//d,slmflsmflsmlmfslfmlsmkf;klkdfjsffdfsjhfhsjfhsjhfjshfjhsjfhsjhfjshfjhsjfhsjh
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.dfsbfsb
 return array(
