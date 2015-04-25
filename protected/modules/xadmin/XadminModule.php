@@ -15,9 +15,11 @@ class XadminModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
+            
 		if(parent::beforeControllerAction($controller, $action))
 		{
             if (Yii::app()->user->isGuest){
+               // exit('11111');
                 Yii::app()->user->returnUrl = Yii::app()->createUrl('xadmin');
                 $controller->redirect(Yii::app()->createUrl('site/login'));
             }

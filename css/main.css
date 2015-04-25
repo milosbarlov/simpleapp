@@ -1,0 +1,19 @@
+.list-recipes .overflow p{
+    line-height: 16px;
+    text-transform: none;
+}
+
+#documenta ul{
+    
+}
+
+#dokumenta ul li a{
+    color:#1e6373;
+}
+#documenta ul li{
+    list-style-type: circle;
+}
+#dokumenta ul li a:hover{
+    text-decoration: underline;
+    color:green;
+}

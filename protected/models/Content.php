@@ -20,7 +20,18 @@ class Content extends CActiveRecord
     
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 0;
-	/**
+    
+    const PAGE_CONTENT = 1;
+    const PAGE_IMAGE = 2;
+    const PRODUCT = 3;
+    const PRODUCT_IMG = 4;
+    const FILE = 5; 
+    const GALLERY = 6;
+    const GALERY_ITEM = 7;
+    const COMPANY = 8;
+    const COMPANY_INFORMATION =9; 
+
+    /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Content the static model class
@@ -47,14 +58,15 @@ class Content extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, excerpt, content', 'required'),
-			array('created_by, create_time, updated_by, update_time, status', 'numerical', 'integerOnly'=>true),
+                      //  array('for_index','chackTopProduct'),
+			array('created_by, create_time, updated_by,for_index update_time, status', 'numerical', 'integerOnly'=>true),
 			array('parent_id', 'length', 'max'=>10),
-            array('created_by, create_time, updated_by, update_time, status' ,'safe'),
+                        array('created_by, create_time, updated_by, update_time, status' ,'safe'),
 			array('title', 'length', 'max'=>64),
 			array('excerpt', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parent_id, title, excerpt, content, created_by, create_time, updated_by, update_time, status', 'safe', 'on'=>'search'),
+			array('id, parent_id, title, excerpt,for_index, content, created_by, create_time, updated_by, update_time, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,9 +78,11 @@ class Content extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'parent'=>array(self::BELONGS_TO, 'Content', 'parent_id'),
-            'children'=>array(self::HAS_MANY, 'Content', array('parent_id'=>'id')),
-            'seo'=>array(self::HAS_ONE, 'Seo', array('model_id'=>'id')),
+                'parent'=>array(self::BELONGS_TO, 'Content', 'parent_id'),
+                'children'=>array(self::HAS_MANY, 'Content', array('parent_id'=>'id')),
+                'seo'=>array(self::HAS_ONE, 'Seo', array('model_id'=>'id')),
+                'one_children'=>array(self::HAS_ONE,'Content','parent_id')      
+                 
 		);
 	}
 
@@ -88,6 +102,7 @@ class Content extends CActiveRecord
 			'updated_by' => Yii::t('application', 'model.content.updated_by'),
 			'update_time' => Yii::t('application', 'model.content.update_time'),
 			'status' => Yii::t('application', 'model.content.status'),
+                        'for_index' => Yii::t('application', 'model.content.index'),
 		);
 	}
 
@@ -118,6 +133,10 @@ class Content extends CActiveRecord
 		));
 	}
         
+        
+        
+        
+       
     public function beforeSave() {
         if($this->isNewRecord)
             $this->status = self::STATUS_ACTIVE;
@@ -131,10 +150,11 @@ class Content extends CActiveRecord
                 'setUpdateOnCreate' => true,
                 'timestampExpression' => 'time()',
             ),
-            'seo'=>array(
-                'class'=>'behaviors.SeoBehavior',
-                'view'=>'catalog',
-            ),
+            
         );
     }
+    
+    
+    
+   
 }

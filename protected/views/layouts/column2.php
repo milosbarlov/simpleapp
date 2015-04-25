@@ -1,38 +1,20 @@
 <?php /* @var $this Controller */ ?>
-<?php $this->beginContent('//layouts/main'); ?>
-<?php
-if(!empty($this->menu))
-{?>
-<div class="span3">
-	<div id="sidebar" class="well">
-	<?php 
-    if (!empty($this->menu))
-    {?>
-        <ul class="nav nav-list">
-        <?php
-        foreach ($this->menu as $key=>$val)
-        {?>
-            <li <?php echo isset($val['class']) ? 'class="'.$val['class'].'"' : '';?>>
-            <?php
-            if (isset($val['url']))
-            {?>
-                <a href="<?php echo isset($val['url']) ? $val['url']:'';?>"><?php echo $val['label'];?></a>
-            <?php
-            }
-            else
-            {
-                echo $val['label'];
-            }?>
-            </li>
-        <?php
-        }?>
-        </ul>
+<?php $this->beginContent('//layouts/adminMain'); ?>
+<div class="span3 well">
+    
     <?php
-    }?>
-	</div><!-- sidebar -->
+        if(!empty($this->menu)){ 
+            foreach ($this->menu as $key){ ?>
+                
+    <ul style="list-style-type: none">
+        <li><a style="text-decoration:none" href="<?php echo $key['url']?>"><?php echo $key['label'] ;?></a></li>
+    </ul>
+            
+            
+     <?php } }?>
+    
+   
 </div>
-<?php
-}?>
 <div class="span9">
 	<div id="content">
 		<?php echo $content; ?>

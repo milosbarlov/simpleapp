@@ -2,11 +2,12 @@
 /* @var $this ContentController */
 /* @var $model Content */
 
+
+
 ?>
 
 <h1>Manage Contents</h1>
 <!-- search-form -->
-
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'content-grid',
 	'dataProvider'=>$model->search(),
@@ -18,6 +19,7 @@
 		'excerpt',
 		//'content',
 		'created_by',
+                'for_index',
 		/*
 		'create_time',
 		'updated_by',

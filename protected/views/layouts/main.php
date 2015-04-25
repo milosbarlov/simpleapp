@@ -11,9 +11,21 @@
 	<link rel="icon" href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico" type="image/x-icon"/>
     <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/bootstrap.min.css'); ?>
     <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/bootstrap-responsive.min.css'); ?>
-    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/bootstrap-theme.min.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/flexslider.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/grid.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/ie.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/lightbox.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/reset.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/style.css'); ?>
+    <?php Yii::app()->getClientScript()->registerCssFile(Yii::app()->request->baseUrl . '/css/main.css'); ?>    
+        
     <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl . '/js/bootstrap.min.js'); ?>
-	<title><?php echo CHtml::encode($this->pageTitle);?></title>
+    <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl . '/js/jquery-1.7.1.min.js'); ?> 
+    <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl . '/js/superfish.js'); ?> 
+    <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl . '/js/jquery.flexslider-min.js'); ?>
+    <?php Yii::app()->getClientScript()->registerScriptFile(Yii::app()->request->baseUrl . '/js/forms.js'); ?>
+        
+    <title><?php echo CHtml::encode($this->pageTitle);?></title>
     <base href="<?php echo Yii::app()->request->baseUrl; ?>/" />
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -22,131 +34,60 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    <style>
-        body {
-            padding-top: 50px;
-        }
-    </style>
+    
+    
+    <script>	
+			jQuery(window).load(function() {								
+			jQuery('.flexslider').flexslider({
+				animation: "fade",			
+				slideshow: true,			
+				slideshowSpeed: 3000,
+				animationDuration: 600,
+				prevText: "",
+				nextText: "",
+				controlNav: false		
+			})
+			  
+			
+					
+      });
+	</script>
+   
 </head>
 
-<body>
+<body id="first_page">
 
-<div class="container-fluid" >
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-inner">
-            <a class="brand" href="<?php echo Yii::app()->createUrl('site/index');?>">Simple App</a>
-            <ul class="nav">
-            <?php
-            if (!empty($this->headerMenu))
-            {
-                foreach ($this->headerMenu as $m)
-                {
-                    if(isset($m['url']) && $m['visible'])
-                    {?>
-                        <li><a href="<?php echo $m['url'];?>"><?php echo $m['label'];?></a></li>
-                    <?php
-                    }
-                    else if (isset($m['items']))
-                    {?>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#">
-                                <?php echo $m['label'];?>
-                                <b class="caret"></b>
-                              </a>
-                            <ul class="dropdown-menu">
-                            <?php
-                            foreach($m['items'] as $mi)
-                            {?>
-                                <li><a href="<?php echo $mi['url'];?>"><?php echo $mi['label'];?></a></li>
-                            <?php
-                            }?>
-                            </ul>
-                    <?php
-                    }
-                }
-            }?>
-            </ul>
-        </div>
+<!--==============================header=================================-->
+<header>
+  
+  <div class="main">
+    <div class="row-top">
+        <h1><a href="<?php echo Yii::app()->createUrl('site/index')?>"><img src="<?php echo Yii::app()->createAbsoluteUrl('/images/index_logo.png') ?>"></a></h1>
+      <nav>
+        <ul class="sf-menu">
+           <?php foreach (PageContent::model()->findAll() as $model){ ?>
+              <li><a href="<?php echo Yii::app()->createUrl('site/'.$model->title) ?>"><?php echo $model->title ?></a></li>
+           <?php }; ?>
+        </ul>
+      </nav>
+      <div class="clear"></div>
     </div>
-    <?php
-    if (!empty($this->breadcrumbs))
-    {?>
-    <ul class="breadcrumb">
-        <?php
-        foreach ($this->breadcrumbs as $b)
-        {
-            if(is_array($b))
-            {?>
-                <li><a href="<?php echo isset($b['url'])? $b['url']:'';?>" ><?php echo $b['label'].'/';?></a></li>
-            <?php
-            }
-            else
-            {?>
-                <li><?php echo $b;?></li>
-            <?php
-            }
-        }?>
-        <!-- breadcrumbs -->
-    </ul>
-    <?php
-    }?>
+  </div>
+   <?php 
+        echo $content;
+   ;?>   
+  
+      
+  
 
-    <div class="row-fluid">
+<!--==============================footer=================================-->
+<footer>
+  <div class="main">
+    &#169;2014 Copyright Megatehna kv
+  </div>
+</footer>
 
-        <?php echo $content; ?>
 
-    </div>
-    <div id="footer" class="container-fluid" >
-        <hr />
-        <?php
-        if (!empty($this->footerMenu))
-        {?>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <ul class="nav">
-                <?php
-                foreach ($this->footerMenu as $m)
-                {
-                    if(isset($m['url']))
-                    {?>
-                        <li><a href="<?php echo $m['url'];?>"><?php echo $m['label'];?></a></li>
-                    <?php
-                    }
-                    else if (isset($m['items']))
-                    {?>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#">
-                                <?php echo $m['label'];?>
-                                <b class="caret"></b>
-                              </a>
-                            <ul class="dropdown-menu">
-                            <?php
-                            foreach($m['items'] as $mi)
-                            {?>
-                                <li><a href="<?php echo $mi['url'];?>"><?php echo $mi['label'];?></a></li>
-                            <?php
-                            }?>
-                            </ul>
-                    <?php
-                    }
-                }?>
-                </ul>
-            </div>
-        </div>
-        <?php
-        }?>
-        <div style="margin: 0 auto; text-align: center">
-            Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-            All Rights Reserved.<br/>
-            <?php echo Yii::powered(); ?>
-        </div>
-    </div>
-    <!-- footer -->
-</div><!-- page -->
 
 </body>
 </html>

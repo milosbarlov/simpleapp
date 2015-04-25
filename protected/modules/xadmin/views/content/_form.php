@@ -31,7 +31,25 @@
 		<?php echo $form->error($model,'excerpt'); ?>
             </div>
 	</div>
-
+        <?php if(get_class($model) == 'File'){?>
+            
+             <div class="control-group">
+		<?php echo $form->labelEx($model,'content', array('class'=>'control-label')); ?>
+                <div class="controls">
+                    <?php
+                     $this->widget('ext.elfinderWidgets.ElFinderInputWidget', array(
+                        'connectorRoute' => Yii::app()->controller->createUrl('content/elFinder'),
+                        'model' => $model,
+                        'attribute' => 'content',
+                        ));
+                    ?>
+                </div>
+            </div> 
+        
+        <?php } ?>
+        
+       <?php if(get_class($model) != 'File'){?>
+                 
 	<div class="control-group">
 		<?php echo $form->labelEx($model,'content', array('class'=>'control-label')); ?>
             <div class="controls">
@@ -39,6 +57,39 @@
 		<?php echo $form->error($model,'content'); ?>
             </div>
 	</div>
+       <?php }?>
+        
+      <?php if(isset($model_img)){?>
+        <div class="control-group">
+		<?php echo $form->labelEx($model_img,'content', array('class'=>'control-label')); ?>
+            <div class="controls">
+		<?php
+                 $this->widget('ext.elfinderWidgets.ElFinderInputWidget', array(
+                    'connectorRoute' => Yii::app()->controller->createUrl('content/elFinder'),
+                    'model' => $model_img,
+                    'attribute' => 'content',
+                    ));
+                ?>
+            </div>
+	</div>
+      <?php } ?>
+        
+       
+       <?php if(get_class($model)=='Product'){?>
+            
+        <div class="control-group">
+		<?php echo $form->labelEx($model,'for_index', array('class'=>'control-label')); ?>
+            <div class="controls">
+		<?php echo $form->dropDownList($model,'for_index',array(1=>'yes',0=>'no')); ?>
+		<?php echo $form->error($model,'for_index'); ?>
+            </div>
+	</div>
+            
+       <?php }?>
+      
+        
+        
+      
 
 	<div class="form-actions">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-primary')); ?>

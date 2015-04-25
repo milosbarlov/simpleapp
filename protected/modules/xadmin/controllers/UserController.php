@@ -21,7 +21,7 @@ class UserController extends Controller
         
     public function beforeRender($view) {
         $this->menu = array(
-            'admin'=>array('url'=>Yii::app()->createUrl('xadmin'), 'label'=>'Admin'),
+            'admin'=>array('url'=>Yii::app()->createUrl('xadmin/user/admin'), 'label'=>'Admin'),
             'create'=>array('url'=>Yii::app()->createUrl('xadmin/user/create'), 'label'=>'Create User'),
             'ownInfo'=>array('url'=>Yii::app()->createUrl('xadmin/user/ownInfo'), 'label'=>'Update Own Info'),
         );
@@ -38,7 +38,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update', 'ownInfo'),
+				'actions'=>array('index','view','create','update', 'ownInfo','logOut','admin'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -202,5 +202,10 @@ class UserController extends Controller
         $this->render('update', array(
             'model'=>$model,
         ));
+    }
+    
+    public function actionLogOut(){
+        Yii::app()->user->logout();
+       
     }
 }

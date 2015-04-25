@@ -26,10 +26,20 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
+                
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+            
+                
+                
+		$model = Gallery::model()->findall();
+                $product = Product::model()->findAllByAttributes(array('for_index'=>1));
+        
+        
+                    $this->render('pocetna',array(
+                        'model'=>$model,
+                        'product'=>$product,
+                        
+                    ));
 	}
 
 	/**
@@ -77,6 +87,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+               
 		$model = new LoginForm;
 
 		// if it is ajax validation request
@@ -95,7 +106,7 @@ class SiteController extends Controller
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->renderPartial('login',array('model'=>$model));
 	}
 
 	/**
@@ -109,6 +120,8 @@ class SiteController extends Controller
         
     public function actionSeo($seo)
     {
+        
+        /*
         $seo = Seo::model()->findByAttributes(array('url'=>$seo));
         if ($seo)
         {
@@ -119,5 +132,62 @@ class SiteController extends Controller
         $this->render('page', array(
             'model'=>$model,
         ));
+         * 
+         */
     }
+    
+    public function actionPocetna(){
+        
+        $model = Gallery::model()->findall();
+        $product = Product::model()->findAllByAttributes(array('for_index'=>1));
+        
+        
+       $this->render('pocetna',array(
+           'model'=>$model,
+           'product'=>$product
+       ));
+    }
+    
+    public function actionProizvodi(){
+        
+        $model = Product::model()->findAll();
+        
+        $this->render('proizvodi',array(
+            'model'=>$model,
+        ));
+    }
+    
+    public function actionOnama(){
+        
+        $model = PageContent::model()->findAllByAttributes(array('title'=>'onama'));
+        
+        
+        $this->render('onama',array(
+            'model'=>$model,
+        ));
+    }
+    
+    public function actionDokumenta(){
+        $model = File::model()->findAll();
+        
+        $this->render('dokumenta',array(
+            'model'=>$model,
+        ));
+    }
+    
+    public function actionKontakt(){
+        
+        $model = Company::model()->findAll();
+        $data = Company_information::model()->findAll();
+        
+        
+        $this->render('kontakt',array(
+            'model'=>$model,
+            'data'=>$data,
+        ));
+        
+    }
+    
+    
+    
 }

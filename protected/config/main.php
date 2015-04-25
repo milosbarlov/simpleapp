@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Simple App',
+	'name'=>'Megatehna KV',
         'timeZone'=>'Europe/Belgrade',
 
 	// preloading 'log' component
@@ -20,6 +20,7 @@ return array(
 	),
     'aliases' => array (
         'behaviors' => realpath( __DIR__ . '/../components/behaviors/' ),
+        'ext' => realpath( __DIR__ . '/../extension/' ),
     ),
 
 	'modules'=>array(
@@ -43,6 +44,15 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+                'messages'=>array(
+
+                    'class'=>'CDbMessageSource',
+                     'sourceMessageTable' => 'SourceMessage',
+                    'translatedMessageTable'=>'Message',
+                    'cachingDuration' => 180,
+
+
+                ),
 		// uncomment the following to enable URLs in path-format
 		
 		'urlManager'=>array(

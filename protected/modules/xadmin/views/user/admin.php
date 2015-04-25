@@ -2,6 +2,8 @@
 /* @var $this UserController */
 /* @var $model User */
 
+/*
+
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	'Manage',
@@ -23,7 +25,7 @@ $('.search-form form').submit(function(){
 	});
 	return false;
 });
-");
+");  */
 ?>
 
 <h1>Manage Users</h1>

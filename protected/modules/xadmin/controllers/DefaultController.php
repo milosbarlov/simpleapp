@@ -20,9 +20,11 @@ class DefaultController extends Controller
 	public function actionIndex()
 	{
         $this->menu = array(
-            'pages'=>array('url'=>Yii::app()->createUrl('xadmin/content/create'), 'label'=>'Content'),
-            'menus'=>array('url'=>Yii::app()->createUrl('xadmin/menuItem/assign', array('mid'=>  MenuItem::HEADER_MANU)), 'label'=>'Menus'),
-            'users'=>array('url'=>Yii::app()->createUrl('xadmin/user/create'), 'label'=>'Users')
+            'pages'=>array('url'=>Yii::app()->createUrl('xadmin/content/create'), 'label'=>'Main Content'),
+          //  'menus'=>array('url'=>Yii::app()->createUrl('xadmin/menuItem/assign', array('mid'=>  MenuItem::HEADER_MANU)), 'label'=>'Menus'),
+            'users'=>array('url'=>Yii::app()->createUrl('xadmin/user/create'), 'label'=>'Users'),
+           
+            
         );
 		$this->render('index');
 	}
